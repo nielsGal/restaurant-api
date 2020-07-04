@@ -2,25 +2,25 @@ package views
 
 import "github.com/gofiber/fiber"
 
-func getCategory(c *fiber.Ctx){
+func GetCategory(c *fiber.Ctx){
 	c.Send("get a specific category")
 }
-func getCategories(c *fiber.Ctx){
+func GetCategories(c *fiber.Ctx){
 	c.Send("get all categories for a specific menu")
 }
 
-func createCategory(c *fiber.Ctx){
+func CreateCategory(c *fiber.Ctx){
 	c.Send("create a specific category")
 }
 
-func createCategories(c *fiber.Ctx){
+func CreateCategories(c *fiber.Ctx){
 	c.Send("create a batch of categories")
 }
 
-func deleteCategory(c *fiber.Ctx){
+func DeleteCategory(c *fiber.Ctx){
 	c.Send("delete a specific category")
 }
 
-func deleteCategories(c *fiber.Ctx){
+func DeleteCategories(c *fiber.Ctx){
 	c.Send("delete a batch of categories")
 }
