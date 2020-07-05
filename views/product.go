@@ -19,6 +19,10 @@ type ProductList struct{
 	Items []Product `json:"Items"` 
 }
 
+type IDList struct{
+	Ids []int `json:"Ids"`
+}
+
 func GetProduct(c * fiber.Ctx){
 	id := c.Params("id")
 	db := database.DBConn
@@ -67,12 +71,10 @@ func DeleteProduct(c* fiber.Ctx){
 }
 
 func DeleteProducts(c* fiber.Ctx){
-	type IDList struct{
-		Ids []int `json:"Ids"`
-	}
+	db := database.DBConn
 	IdList := new(IDList)
 	if err := c.BodyParser(IdList); err !=nil{
-		c.Status(422).Send("could not process requet")
+		c.Status(422).Send("could not process request")
 	}
-	c.JSON(IdList)
+	db.Where("ID IN (?)",IdList.Ids).Delete(&Product{})
 }
