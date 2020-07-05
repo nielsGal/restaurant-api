@@ -1,8 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber"
 	"github.com/nielsGal/restaurant-api/views"
+	"github.com/nielsGal/restaurant-api/database"
+
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
 
@@ -26,9 +31,22 @@ func setupRoutes(app *fiber.App){
 	app.Delete("/api/v1/delete-categories",views.DeleteCategories)
 }
 
+func InitDatabase(){
+	var err error
+	database.DBConn, err = gorm.Open("sqlite3","rest.db")
+	if err != nil {
+		panic("failed to connect to database")
+	}
+	fmt.Println("database connection established")
+	database.DBConn.AutoMigrate(&views.Product{})
+	fmt.Println("database migrated")
+
+}
 
 func main() {
 	app := fiber.New()
+	InitDatabase()
+	defer database.DBConn.Close()
 	setupRoutes(app)
 	app.Listen("3000")
 }
