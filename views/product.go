@@ -1,6 +1,7 @@
 package views
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber"
 	"github.com/jinzhu/gorm"
 	"github.com/nielsGal/restaurant-api/database"
@@ -14,6 +15,9 @@ type Product struct{
 	ImageUrl string `json:"ImageUrl"`
 }
 
+type ProductList struct{
+	Items []Product `json:"Items"` 
+}
 
 func GetProduct(c * fiber.Ctx){
 	id := c.Params("id")
@@ -41,7 +45,13 @@ func CreateProduct(c* fiber.Ctx){
 }
 
 func CreateProducts(c* fiber.Ctx){
-	c.Send("create a batch of products")
+	products := new(ProductList)
+	if err := c.BodyParser(products); err != nil{
+		c.Status(422).Send("could not process request")
+		fmt.Println(err)
+	}
+	fmt.Println(products)
+	c.JSON(products)
 }
 
 func DeleteProduct(c* fiber.Ctx){
