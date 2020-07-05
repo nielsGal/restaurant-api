@@ -21,7 +21,7 @@ func setupRoutes(app *fiber.App){
 	app.Post("/api/v1/create-product",views.CreateProduct)
 	app.Post("/api/v1/create-products",views.CreateProducts)
 	app.Delete("/api/v1/delete-product",views.DeleteProduct)
-	app.Delete("/api/v1/delete-products",views.DeleteProducts)
+	app.Post("/api/v1/delete-products",views.DeleteProducts)
 
 	app.Get("/api/v1/get-category",views.GetCategory)
 	app.Get("/api/v1/get-categories",views.GetCategories)

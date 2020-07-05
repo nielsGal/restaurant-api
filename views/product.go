@@ -50,7 +50,6 @@ func CreateProducts(c* fiber.Ctx){
 		c.Status(422).Send("could not process request")
 		fmt.Println(err)
 	}
-	fmt.Println(products)
 	c.JSON(products)
 }
 
@@ -68,5 +67,12 @@ func DeleteProduct(c* fiber.Ctx){
 }
 
 func DeleteProducts(c* fiber.Ctx){
-	c.Send("delete a batch of products")
+	type IDList struct{
+		Ids []int `json:"Ids"`
+	}
+	IdList := new(IDList)
+	if err := c.BodyParser(IdList); err !=nil{
+		c.Status(422).Send("could not process requet")
+	}
+	c.JSON(IdList)
 }
