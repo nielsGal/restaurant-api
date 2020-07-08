@@ -19,9 +19,9 @@ func GetProduct(c * fiber.Ctx){
 
 func GetProducts(c *fiber.Ctx){
 	db := database.DBConn
-	var product []Product
-	db.Find(&product)
-	c.JSON(product)
+	var products []Product
+	db.Find(&products)
+	c.JSON(products)
 }
 
 func CreateProduct(c* fiber.Ctx){
@@ -40,8 +40,8 @@ func CreateProducts(c* fiber.Ctx){
 	//Todo find some clever single query
 	products := new(ProductList)
 	if err := c.BodyParser(products); err != nil{
-		c.Status(422).Send("could not process request")
 		fmt.Println(err)
+		c.Status(422).Send("could not process request")
 	}
 	c.JSON(products)
 }
