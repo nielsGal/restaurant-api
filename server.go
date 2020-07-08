@@ -13,8 +13,10 @@ import (
 
 func setupRoutes(app *fiber.App){
 	app.Get("/api/v1/get-menu",views.GetMenu)
+	app.Get("/api/v1/get-menus",views.GetMenus)
 	app.Post("/api/v1/create-menu",views.CreateMenu)
 	app.Delete("/api/v1/delete-menu",views.DeleteMenu)
+	app.Post("/api/v1/delete-menus",views.DeleteMenus)
 
 	app.Get("/api/v1/get-product",views.GetProduct)
 	app.Get("/api/v1/get-products",views.GetProducts)
