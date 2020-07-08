@@ -6,20 +6,8 @@ import (
 	"github.com/nielsGal/restaurant-api/database"
 )
 
-type Product struct{
-	Name string `json:"Name"`
-	Price float32 `json:"Price"`
-	Description string `json:"Description"`
-	ImageUrl string `json:"ImageUrl"`
-}
 
-type ProductList struct{
-	Items []Product `json:"Items"` 
-}
 
-type IDList struct{
-	Ids []int `json:"Ids"`
-}
 
 func GetProduct(c * fiber.Ctx){
 	id := c.Params("id")

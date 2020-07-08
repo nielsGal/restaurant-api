@@ -1,18 +1,13 @@
 package views
 
 import (
-	"time"
 	"fmt"
 	"github.com/gofiber/fiber"
 	"github.com/nielsGal/restaurant-api/database"
 )
 
 
-type Category struct{
-	Name string `json:"Name"`
-	From *time.Time `json:"From"`
-	To *time.Time `json:"To"`
-}  
+
 
 func GetCategory(c *fiber.Ctx){
 	db := database.DBConn
