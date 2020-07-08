@@ -49,6 +49,7 @@ func CreateProduct(c* fiber.Ctx){
 }
 
 func CreateProducts(c* fiber.Ctx){
+	//Todo find some clever single query
 	products := new(ProductList)
 	if err := c.BodyParser(products); err != nil{
 		c.Status(422).Send("could not process request")

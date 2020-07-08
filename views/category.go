@@ -2,6 +2,7 @@ package views
 
 import (
 	"time"
+	"fmt"
 	"github.com/gofiber/fiber"
 	"github.com/nielsGal/restaurant-api/database"
 )
@@ -9,8 +10,8 @@ import (
 
 type Category struct{
 	Name string `json:"Name"`
-	From *time.Time `json:From`
-	To *time.Time `json:To`
+	From *time.Time `json:"From"`
+	To *time.Time `json:"To"`
 }  
 
 func GetCategory(c *fiber.Ctx){
@@ -35,13 +36,14 @@ func CreateCategory(c *fiber.Ctx){
 	}
 
 	if result := db.Create(&category); result.Error != nil {
+		fmt.Println(result.Error)
 		c.Status(500).Send("there was some error creating the category")
 	}
 	c.JSON(category)
 }
 
 func CreateCategories(c *fiber.Ctx){
-	//db := database.DBConn
+	//Todo find some clever single query
 	categories := new([]Category)
 	if err := c.BodyParser(categories); err != nil {
 		c.Status(422).Send("there is some error in the request")
