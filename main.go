@@ -39,6 +39,8 @@ func InitDatabase(){
 	}
 	fmt.Println("database connection established")
 	database.DBConn.AutoMigrate(&views.Product{})
+	database.DBConn.AutoMigrate(&views.Category{})
+	database.DBConn.AutoMigrate(&views.Menu{})
 	fmt.Println("database migrated")
 
 }
