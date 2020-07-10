@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber"
 	"github.com/gofiber/basicauth"
-	"github.com/nielsGal/restaurant-api/views"
+	"github.com/nielsGal/restaurant-api/authRoutes"
 	"github.com/nielsGal/restaurant-api/database"
-	
+	"github.com/nielsGal/restaurant-api/types"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
@@ -14,25 +14,25 @@ import (
 
 
 func setupRoutes(app *fiber.App){
-	app.Get("/api/v1/get-menu",views.GetMenu)
-	app.Get("/api/v1/get-menus",views.GetMenus)
-	app.Post("/api/v1/create-menu",views.CreateMenu)
-	app.Delete("/api/v1/delete-menu",views.DeleteMenu)
-	app.Post("/api/v1/delete-menus",views.DeleteMenus)
+	app.Get("/api/v1/get-menu",authRoutes.GetMenu)
+	app.Get("/api/v1/get-menus",authRoutes.GetMenus)
+	app.Post("/api/v1/create-menu",authRoutes.CreateMenu)
+	app.Delete("/api/v1/delete-menu",authRoutes.DeleteMenu)
+	app.Post("/api/v1/delete-menus",authRoutes.DeleteMenus)
 
-	app.Get("/api/v1/get-product",views.GetProduct)
-	app.Get("/api/v1/get-products",views.GetProducts)
-	app.Post("/api/v1/create-product",views.CreateProduct)
-	app.Post("/api/v1/create-products",views.CreateProducts)
-	app.Delete("/api/v1/delete-product",views.DeleteProduct)
-	app.Post("/api/v1/delete-products",views.DeleteProducts)
+	app.Get("/api/v1/get-product",authRoutes.GetProduct)
+	app.Get("/api/v1/get-products",authRoutes.GetProducts)
+	app.Post("/api/v1/create-product",authRoutes.CreateProduct)
+	app.Post("/api/v1/create-products",authRoutes.CreateProducts)
+	app.Delete("/api/v1/delete-product",authRoutes.DeleteProduct)
+	app.Post("/api/v1/delete-products",authRoutes.DeleteProducts)
 
-	app.Get("/api/v1/get-category",views.GetCategory)
-	app.Get("/api/v1/get-categories",views.GetCategories)
-	app.Post("/api/v1/create-category",views.CreateCategory)
-	app.Post("/api/v1/create-categories",views.CreateCategories)
-	app.Delete("/api/v1/delete-category",views.DeleteCategory)
-	app.Delete("/api/v1/delete-categories",views.DeleteCategories)
+	app.Get("/api/v1/get-category",authRoutes.GetCategory)
+	app.Get("/api/v1/get-categories",authRoutes.GetCategories)
+	app.Post("/api/v1/create-category",authRoutes.CreateCategory)
+	app.Post("/api/v1/create-categories",authRoutes.CreateCategories)
+	app.Delete("/api/v1/delete-category",authRoutes.DeleteCategory)
+	app.Delete("/api/v1/delete-categories",authRoutes.DeleteCategories)
 }
 
 func InitDatabase(){
@@ -42,9 +42,9 @@ func InitDatabase(){
 		panic("failed to connect to database")
 	}
 	fmt.Println("database connection established")
-	database.DBConn.AutoMigrate(&views.Product{})
-	database.DBConn.AutoMigrate(&views.Category{})
-	database.DBConn.AutoMigrate(&views.Menu{})
+	database.DBConn.AutoMigrate(&types.Product{})
+	database.DBConn.AutoMigrate(&types.Category{})
+	database.DBConn.AutoMigrate(&types.Menu{})
 	fmt.Println("database migrated")
 
 }

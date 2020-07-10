@@ -1,9 +1,10 @@
-package views
+package authRoutes
 
 import (
 	"fmt"
 	"github.com/gofiber/fiber"
 	"github.com/nielsGal/restaurant-api/database"
+	"github.com/nielsGal/restaurant-api/types"
 )
 
 
@@ -12,20 +13,20 @@ import (
 func GetCategory(c *fiber.Ctx){
 	db := database.DBConn
 	id := c.Params("id")
-	var category Category
+	var category types.Category
 	db.Find(&category,id)
 	c.JSON(category)
 }
 func GetCategories(c *fiber.Ctx){
 	db := database.DBConn
-	var category []Category
+	var category []types.Category
 	db.Find(&category)
 	c.JSON(category)
 }
 
 func CreateCategory(c *fiber.Ctx){
 	db := database.DBConn
-	category := new(Category)
+	category := new(types.Category)
 	if err := c.BodyParser(category); err != nil{
 		c.Status(422).Send("there is some error in the request")
 	}
@@ -39,7 +40,7 @@ func CreateCategory(c *fiber.Ctx){
 
 func CreateCategories(c *fiber.Ctx){
 	db := database.DBConn
-	categories := new(CategoryList)
+	categories := new(types.CategoryList)
 	if err := c.BodyParser(categories); err != nil {
 		c.Status(422).Send("there is some error in the request")
 	}	
@@ -54,7 +55,7 @@ func CreateCategories(c *fiber.Ctx){
 func DeleteCategory(c *fiber.Ctx){
 	id := c.Params("id")
 	db := database.DBConn
-	category := new(Category)
+	category := new(types.Category)
 	db.First(category,id)
 	if (category.Name == "") {
 		c.Status(404).Send("no such category exists")
@@ -67,9 +68,9 @@ func DeleteCategory(c *fiber.Ctx){
 
 func DeleteCategories(c *fiber.Ctx){
 	db := database.DBConn
-	IdList := new(IDList)
+	IdList := new(types.IDList)
 	if err := c.BodyParser(IdList); err !=nil{
 		c.Status(422).Send("there was some error in the request")
 	}
-	db.Where("ID IN (?)",IdList.Ids).Delete(&Category{})
+	db.Where("ID IN (?)",IdList.Ids).Delete(&types.Category{})
 }

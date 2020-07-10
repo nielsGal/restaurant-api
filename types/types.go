@@ -1,4 +1,4 @@
-package views
+package types
 
 import(
 	"time"
