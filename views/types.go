@@ -9,7 +9,7 @@ type IDList struct{
 }
 
 type Product struct{
-	ID uint `json:"Id"`
+	ID uint `json:"ID" gorm:"primary_key"`
 	Name string `json:"Name"`
 	Price float32 `json:"Price"`
 	Description string `json:"Description"`
@@ -21,7 +21,7 @@ type ProductList struct{
 }
 
 type Category struct{
-	ID uint `json:"Id"`
+	ID uint `json:"ID" gorm:"primary_key"`
 	Name string `json:"Name"`
 	From *time.Time `json:"From"`
 	To *time.Time `json:"To"`
@@ -33,7 +33,7 @@ type CategoryList struct{
 }
 
 type Menu struct{
-	ID uint `json:"Id"`
+	ID uint `json:"ID" gorm:"primary_key"`
 	Name string `json:"Name"`
 	From *time.Time `json:"From"`
 	To *time.Time `json:"To"`
@@ -45,13 +45,11 @@ type MenuList struct{
 }
 
 type ClientProfile struct {
-	ID uint `json:"Id"`
 	Menus []Menu `json:"Menus"`
 	ActiveMenu Menu `json:"ActiveMenu"`
 	Name string `json:"Name"`
 }
 
 type User struct{
-	ID uint `json:"Id"`
 	
 }

@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  db:
+    image: postgress
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: restDB
+    volumes:
+     - ./pgdata
+    ports:
+     - "5432":"5432"
+  web:
+    image: restaurant-server
+    depends_on:
+     - db
+    ports:
+     - "3000:3000"

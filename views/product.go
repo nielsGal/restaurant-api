@@ -30,6 +30,8 @@ func CreateProduct(c* fiber.Ctx){
 	if err := c.BodyParser(product); err != nil {
 		c.Status(422).Send("there is some error in the request")
 	}
+	fmt.Println(product)
+	fmt.Println(product.ID)
 	if result := db.Create(&product); result.Error != nil {
 		c.Status(500).Send("there was some error creating the product")
 	}
@@ -44,7 +46,7 @@ func CreateProducts(c* fiber.Ctx){
 		c.Status(422).Send("could not process request")
 	}
 	for _ , product := range products.Items {
-		if result := db.Create(product); result.Error != nil {
+		if result := db.Create(&product); result.Error != nil {
 			fmt.Println(result.Error)
 			c.Status(500).Send("there was an error creathing these products")
 		}

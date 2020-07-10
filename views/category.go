@@ -44,7 +44,7 @@ func CreateCategories(c *fiber.Ctx){
 		c.Status(422).Send("there is some error in the request")
 	}	
 	for _ , category := range categories.Categories {
-		if result := db.Create(category); result.Error != nil {
+		if result := db.Create(&category); result.Error != nil {
 			c.Status(500).Send("there was an issue creating these categories")
 		}
 	}

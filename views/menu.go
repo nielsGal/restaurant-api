@@ -27,7 +27,7 @@ func CreateMenu(c *fiber.Ctx){
 	if err := c.BodyParser(menu); err != nil {
 		c.Status(422).Send("there was a problem with the request")
 	}
-	if result := db.Create(menu); result.Error != nil {
+	if result := db.Create(&menu); result.Error != nil {
 		fmt.Println(result.Error)
 		c.Status(500).Send("there was an issue creating the menu")
 	}
@@ -42,7 +42,7 @@ func CreateMenus(c* fiber.Ctx){
 		c.Status(422).Send("could not process request")
 	}
 	for _ ,menu := range menus.Menus {
-		if result := db.Create(menu); result.Error != nil {
+		if result := db.Create(&menu); result.Error != nil {
 			fmt.Println(result.Error)
 			c.Status(500).Send("there was an issue creating the menus")
 		}
