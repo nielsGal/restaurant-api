@@ -30,8 +30,6 @@ func CreateProduct(c* fiber.Ctx){
 	if err := c.BodyParser(product); err != nil {
 		c.Status(422).Send("there is some error in the request")
 	}
-	fmt.Println(product)
-	fmt.Println(product.ID)
 	if result := db.Create(&product); result.Error != nil {
 		c.Status(500).Send("there was some error creating the product")
 	}
