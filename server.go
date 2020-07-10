@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber"
 	"github.com/gofiber/basicauth"
+	"github.com/nielsGal/restaurant-api/noAuthRoutes"
 	"github.com/nielsGal/restaurant-api/authRoutes"
 	"github.com/nielsGal/restaurant-api/database"
 	"github.com/nielsGal/restaurant-api/types"
@@ -13,7 +14,7 @@ import (
 )
 
 
-func setupRoutes(app *fiber.App){
+func setupAuthRoutes(app *fiber.App){
 	app.Get("/api/v1/get-menu",authRoutes.GetMenu)
 	app.Get("/api/v1/get-menus",authRoutes.GetMenus)
 	app.Post("/api/v1/create-menu",authRoutes.CreateMenu)
@@ -33,6 +34,10 @@ func setupRoutes(app *fiber.App){
 	app.Post("/api/v1/create-categories",authRoutes.CreateCategories)
 	app.Delete("/api/v1/delete-category",authRoutes.DeleteCategory)
 	app.Delete("/api/v1/delete-categories",authRoutes.DeleteCategories)
+}
+
+func setupNonAuthRoutes(app *fiber.App){
+	app.Get("/",noAuthRoutes.GetIndex)
 }
 
 func InitDatabase(){
@@ -64,7 +69,8 @@ func main() {
 	app := fiber.New()
 	InitDatabase()
 	defer database.DBConn.Close()
+	setupNonAuthRoutes(app)
 	setupAuth(app)
-	setupRoutes(app)
+	setupAuthRoutes(app)
 	app.Listen("3000")
 }
