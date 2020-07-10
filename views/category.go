@@ -38,11 +38,16 @@ func CreateCategory(c *fiber.Ctx){
 }
 
 func CreateCategories(c *fiber.Ctx){
-	//Todo find some clever single query
-	categories := new([]Category)
+	db := database.DBConn
+	categories := new(CategoryList)
 	if err := c.BodyParser(categories); err != nil {
 		c.Status(422).Send("there is some error in the request")
 	}	
+	for _ , category := range categories.Categories {
+		if result := db.Create(category); result.Error != nil {
+			c.Status(500).Send("there was an issue creating these categories")
+		}
+	}
 	c.JSON(categories)
 }
 

@@ -7,8 +7,8 @@ import (
 )
 
 func GetMenu(c *fiber.Ctx){
-	id := c.Params("id")
 	db := database.DBConn
+	id := c.Params("id")
 	menu := new(Menu)
 	db.First(menu,id)
 	c.JSON(menu)
@@ -35,11 +35,17 @@ func CreateMenu(c *fiber.Ctx){
 }
 
 func CreateMenus(c* fiber.Ctx){
-	//Todo find some clever single query
+	db := database.DBConn
 	menus := new(MenuList)
 	if err := c.BodyParser(menus); err != nil{
 		fmt.Println(err)
 		c.Status(422).Send("could not process request")
+	}
+	for _ ,menu := range menus.Menus {
+		if result := db.Create(menu); result.Error != nil {
+			fmt.Println(result.Error)
+			c.Status(500).Send("there was an issue creating the menus")
+		}
 	}
 	c.JSON(menus)
 }

@@ -10,8 +10,8 @@ import (
 
 
 func GetProduct(c * fiber.Ctx){
-	id := c.Params("id")
 	db := database.DBConn
+	id := c.Params("id")
 	var product Product
 	db.Find(&product,id)
 	c.JSON(product)
@@ -37,18 +37,24 @@ func CreateProduct(c* fiber.Ctx){
 }
 
 func CreateProducts(c* fiber.Ctx){
-	//Todo find some clever single query
+	db := database.DBConn
 	products := new(ProductList)
 	if err := c.BodyParser(products); err != nil{
 		fmt.Println(err)
 		c.Status(422).Send("could not process request")
 	}
+	for _ , product := range products.Items {
+		if result := db.Create(product); result.Error != nil {
+			fmt.Println(result.Error)
+			c.Status(500).Send("there was an error creathing these products")
+		}
+	}
 	c.JSON(products)
 }
 
 func DeleteProduct(c* fiber.Ctx){
-	id := c.Params("id")
 	db := database.DBConn
+	id := c.Params("id")
 	product := new(Product)
 	db.First(product,id)
 	if (product.Name == ""){
@@ -58,7 +64,7 @@ func DeleteProduct(c* fiber.Ctx){
 	if result := db.Delete(&product); result.Error != nil {
 		c.Status(500).Send("there was some issue with deleting this product")
 	}
-	c.Send("deleted product")
+	c.JSON(product)
 }
 
 func DeleteProducts(c* fiber.Ctx){
