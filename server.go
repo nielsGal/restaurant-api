@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/gofiber/fiber"
+	"github.com/gofiber/basicauth"
 	"github.com/nielsGal/restaurant-api/views"
 	"github.com/nielsGal/restaurant-api/database"
+	
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
@@ -47,10 +49,22 @@ func InitDatabase(){
 
 }
 
+func setupAuth(app *fiber.App){
+	cfg := basicauth.Config{
+		Users: map[string]string{
+			"john": "doe",
+		},
+	}
+	
+	app.Use(basicauth.New(cfg))
+}
+
+
 func main() {
 	app := fiber.New()
 	InitDatabase()
 	defer database.DBConn.Close()
+	setupAuth(app)
 	setupRoutes(app)
 	app.Listen("3000")
 }
