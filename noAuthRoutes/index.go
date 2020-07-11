@@ -5,5 +5,5 @@ import (
 )
 
 func GetIndex(c *fiber.Ctx){
-	c.Send("hello")
+	c.Render("index",fiber.Map{"Title": "hello world"}, "layouts/main")
 }

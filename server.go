@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber"
 	"github.com/gofiber/basicauth"
+	"github.com/gofiber/template/pug"
+
 	"github.com/nielsGal/restaurant-api/noAuthRoutes"
 	"github.com/nielsGal/restaurant-api/authRoutes"
 	"github.com/nielsGal/restaurant-api/database"
@@ -66,7 +68,10 @@ func setupAuth(app *fiber.App){
 
 
 func main() {
-	app := fiber.New()
+	engine := pug.New("./views",".pug")
+	app := fiber.New(&fiber.Settings{
+		Views: engine,
+	})
 	InitDatabase()
 	defer database.DBConn.Close()
 	setupNonAuthRoutes(app)
