@@ -51,5 +51,8 @@ type ClientProfile struct {
 }
 
 type User struct{
-	
+	UserName string `grom:"primary_key"`
+	Salt string 
+	Hash string
+	Profile ClientProfile
 }
