@@ -72,6 +72,7 @@ func main() {
 	app := fiber.New(&fiber.Settings{
 		Views: engine,
 	})
+	app.Static("/public","./public")
 	InitDatabase()
 	defer database.DBConn.Close()
 	setupNonAuthRoutes(app)
