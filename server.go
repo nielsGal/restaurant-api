@@ -40,6 +40,7 @@ func setupAuthRoutes(app *fiber.App){
 
 func setupNonAuthRoutes(app *fiber.App){
 	app.Get("/",noAuthRoutes.GetIndex)
+	app.Get("/login",noAuthRoutes.GetLogin)
 }
 
 func InitDatabase(){
