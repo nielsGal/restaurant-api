@@ -5,9 +5,21 @@ import (
 )
 
 func GetIndex(c *fiber.Ctx){
-	c.Render("index",fiber.Map{"Title": "hello world"}, "layouts/guest")
+	c.Render("index",nil, "layouts/guest")
 }
 
 func GetLogin(c *fiber.Ctx){
-	c.Render("login",fiber.Map{"Title": "login page"},"layouts/guest")
+	c.Render("login",nil,"layouts/guest")
+}
+
+func GetRegister(c *fiber.Ctx){
+	c.Render("register",nil,"layouts/user")
+}
+
+func GetContact(c *fiber.Ctx){
+	c.Render("contact",nil,"layouts/guest")
+}
+
+func PostContact(c *fiber.Ctx){
+	c.Render("contact",nil,"layouts/guest")
 }

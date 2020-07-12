@@ -41,6 +41,9 @@ func setupAuthRoutes(app *fiber.App){
 func setupNonAuthRoutes(app *fiber.App){
 	app.Get("/",noAuthRoutes.GetIndex)
 	app.Get("/login",noAuthRoutes.GetLogin)
+	app.Get("/register",noAuthRoutes.GetRegister)
+	app.Get("/contact",noAuthRoutes.GetContact)
+	app.Post("/contact",noAuthRoutes.PostContact)
 }
 
 func InitDatabase(){
