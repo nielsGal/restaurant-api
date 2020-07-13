@@ -45,7 +45,8 @@ type MenuList struct{
 }
 
 type Restaurant struct {
-	Adress string `json:"Adress"`
+	StreetName string `json:"StreetName"`
+	ZipCode string `json:"ZipCode"`
 	Categories []Category `json:"Categories" form:"Categories"`
 	Products []Product `json:"Products" form:"Products"`
 	Menus []Menu `json:"Menus" form:"Menus"`
@@ -56,7 +57,8 @@ type Restaurant struct {
 
 type ClientProfile struct {
 	Restaurant Restaurant  `json:"Restaurant"`
-	Adress string `json:"Adress"`
+	StreetName string `json:"StreetName"`
+	ZipCode string `json:"ZipCode"`
 }
 
 type PrintJob  struct {
@@ -65,7 +67,7 @@ type PrintJob  struct {
 }
 
 type User struct{
-	UserName string `grom:"primary_key"`
+	UserName string `grom:"primary_key" json:"UserName"`
 	Salt string 
 	Hash string
 	Email string 
