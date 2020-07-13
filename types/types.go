@@ -44,13 +44,19 @@ type MenuList struct{
 	Menus []Menu `json:"Menus" form:"Menus"`
 }
 
-type ClientProfile struct {
+type Restaurant struct {
+	Adress string `json:"Adress"`
 	Categories []Category `json:"Categories" form:"Categories"`
 	Products []Product `json:"Products" form:"Products"`
 	Menus []Menu `json:"Menus" form:"Menus"`
 	ActiveMenu Menu `json:"ActiveMenu" form:"ActiveMenu"`
 	Name string `json:"Name" form:"Name"`
 	ImageUrl string `json:"ImageUrl" form:"ImageUrl"`
+}
+
+type ClientProfile struct {
+	Restaurant Restaurant  `json:"Restaurant"`
+	Adress string `json:"Adress"`
 }
 
 type PrintJob  struct {
