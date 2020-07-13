@@ -9,48 +9,48 @@ type IDList struct{
 }
 
 type Product struct{
-	ID uint `json:"ID" gorm:"primary_key"`
-	Name string `json:"Name"`
-	Price float32 `json:"Price"`
-	Description string `json:"Description"`
-	ImageUrl string `json:"ImageUrl"`
+	ID uint `json:"ID" form:"ID" gorm:"primary_key"`
+	Name string `json:"Name" form:"Name"`
+	Price float32 `json:"Price" form:"Price"`
+	Description string `json:"Description" form:"Description"`
+	ImageUrl string `json:"ImageUrl" form:"ImageUrl"`
 }
 
 type ProductList struct{
-	Items []Product `json:"Items"` 
+	Items []Product `json:"Items" form:"Items"` 
 }
 
 type Category struct{
-	ID uint `json:"ID" gorm:"primary_key"`
-	Name string `json:"Name"`
-	From *time.Time `json:"From"`
-	To *time.Time `json:"To"`
-	Products []Product `json:"Products"`
+	ID uint `json:"ID" form:"ID" gorm:"primary_key"`
+	Name string `json:"Name" form:"Name"`
+	From *time.Time `json:"From" form:"From"`
+	To *time.Time `json:"To" form:"To"`
+	Products []Product `json:"Products" form:"Products"`
 }  
 
 type CategoryList struct{
-	Categories []Category `json:"Categories"`
+	Categories []Category `json:"Categories" form:"Categories"`
 }
 
 type Menu struct{
-	ID uint `json:"ID" gorm:"primary_key"`
-	Name string `json:"Name"`
-	From *time.Time `json:"From"`
-	To *time.Time `json:"To"`
-	Categories []Category `json:"Categories"`
+	ID uint `json:"ID" form:"ID" gorm:"primary_key"`
+	Name string `json:"Name" form:"Name"`
+	From *time.Time `json:"From" form:"From"`
+	To *time.Time `json:"To" form:"To"`
+	Categories []Category `json:"Categories" form:"Categories"`
 }
 
 type MenuList struct{
-	Menus []Menu `json:"Menus"`
+	Menus []Menu `json:"Menus" form:"Menus"`
 }
 
 type ClientProfile struct {
-	Categories []Category `json:"Categories"`
-	Products []Product `json:"Products"`
-	Menus []Menu `json:"Menus"`
-	ActiveMenu Menu `json:"ActiveMenu"`
-	Name string `json:"Name"`
-	ImageUrl string `json:"ImageUrl"`
+	Categories []Category `json:"Categories" form:"Categories"`
+	Products []Product `json:"Products" form:"Products"`
+	Menus []Menu `json:"Menus" form:"Menus"`
+	ActiveMenu Menu `json:"ActiveMenu" form:"ActiveMenu"`
+	Name string `json:"Name" form:"Name"`
+	ImageUrl string `json:"ImageUrl" form:"ImageUrl"`
 }
 
 type User struct{
@@ -62,8 +62,8 @@ type User struct{
 }
 
 type ContactRequest struct {
-	ID uint `json:"ID" gorm:"primary_key"`
-	Name string `json:"Name"`
-	Email string `json:"Email"`
-	Message string	`json:"Message"`
+	ID uint `json:"ID" form:"ID" gorm:"primary_key"`
+	Name string `json:"Name" form:"Name"`
+	Email string `json:"Email" form:"Email"`
+	Message string	`json:"Message" form:"Message"`
 }

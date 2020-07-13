@@ -15,8 +15,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
-
-func setupAuthRoutes(app *fiber.App){
+func setupAPI(app *fiber.App){
 	app.Get("/api/v1/get-menu",authRoutes.GetMenu)
 	app.Get("/api/v1/get-menus",authRoutes.GetMenus)
 	app.Post("/api/v1/create-menu",authRoutes.CreateMenu)
@@ -36,6 +35,11 @@ func setupAuthRoutes(app *fiber.App){
 	app.Post("/api/v1/create-categories",authRoutes.CreateCategories)
 	app.Delete("/api/v1/delete-category",authRoutes.DeleteCategory)
 	app.Delete("/api/v1/delete-categories",authRoutes.DeleteCategories)
+}
+
+func setupAuthRoutes(app *fiber.App){
+	app.Get("/admin",authRoutes.GetAdminPage)
+	app.Get("/admin/restaurants",authRoutes.GetAdminRestaurantPage)
 }
 
 func setupNonAuthRoutes(app *fiber.App){

@@ -7,3 +7,7 @@ import (
 func GetAdminPage(c *fiber.Ctx){
 	c.Render("admin",nil,"layouts/admin")
 }
+
+func GetAdminRestaurantPage(c *fiber.Ctx){
+	c.Render("admin",nil,"layouts/admin")
+}
