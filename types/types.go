@@ -53,11 +53,17 @@ type ClientProfile struct {
 	ImageUrl string `json:"ImageUrl" form:"ImageUrl"`
 }
 
+type PrintJob  struct {
+	MacSdress string `json:"MacAdress" form:"MacAdress"`
+	PrintJob string `json:"PrintJob" form:"PrintJob"`
+}
+
 type User struct{
 	UserName string `grom:"primary_key"`
 	Salt string 
 	Hash string
 	Email string 
+	IsAdmin bool
 	Profile ClientProfile
 }
 
